@@ -1,0 +1,6 @@
+@ModestyRubis_HostAddress = http://localhost:5278
+
+GET {{ModestyRubis_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
