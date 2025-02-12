@@ -11,6 +11,5 @@ namespace ModestyRubis
         public string? Summary { get; set; }
 
         public int Teste { get; set; }
-        public string clima { get; set; }
     }
 }
