@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Compra
     {
         [Key]
-        public long Id { get; set; }
+        public Guid CompraId { get; set; }
 
         [Required]
         [ForeignKey("Cliente")]

@@ -2,19 +2,19 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Produto
     {
         [Key]
-        public long Id { get; set; }
+        public Guid ProdutoId { get; set; }
 
         [Required]
         public string Nome { get; set; }
 
         [Required]
         [ForeignKey("Categoria")]
-        public long CategoriaId { get; set; }
+        public Guid CategoriaId { get; set; }
 
         [Required]
         public decimal Preco { get; set; }

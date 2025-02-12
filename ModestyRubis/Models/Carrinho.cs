@@ -2,20 +2,20 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Carrinho
     {
         [Key]
-        public long Id { get; set; }
+        public Guid CarrinhoId { get; set; }
 
         [Required]
         [ForeignKey("Cliente")]
-        public long ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
 
         [Required]
         [ForeignKey("Produto")]
-        public long ProdutoId { get; set; }
+        public Guid ProdutoId { get; set; }
 
         [Required]
         public int Quantidade { get; set; }
@@ -23,7 +23,7 @@ namespace YourNamespace.Models
         public DateTime DataAdicionado { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
-        public virtual Cliente Cliente { get; set; }
+        public virtual Cliente? Cliente { get; set; }
         public virtual Produto Produto { get; set; }
     }
 }

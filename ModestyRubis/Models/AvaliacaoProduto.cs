@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class AvaliacaoProduto
     {
         [Key]
-        public long Id { get; set; }
+        public Guid AvaliacaoProdutoId { get; set; }
 
         [Required]
         [ForeignKey("Produto")]
@@ -15,7 +15,7 @@ namespace YourNamespace.Models
 
         [Required]
         [ForeignKey("Cliente")]
-        public long ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
 
         [Range(1, 5)]
         public int Avaliacao { get; set; }

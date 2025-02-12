@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Categoria
     {
         [Key]
-        public long Id { get; set; }
+        public long CategoriaId { get; set; }
 
         [Required]
         [StringLength(100)]

@@ -3,27 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using YourNamespace.Models;
+using ModeltyRubis.Models;
 
 namespace ModestyRubis.Data
 {
     public class ModestyRubisContext : DbContext
     {
-        public ModestyRubisContext (DbContextOptions<ModestyRubisContext> options)
+        public ModestyRubisContext(DbContextOptions<ModestyRubisContext> options)
             : base(options)
         {
         }
+        public DbSet<AvaliacaoProduto> AvaliacaoProduto { get; set; }
+        public DbSet<Carrinho> Carrinho { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Compra> Compra { get; set; }
+        public DbSet<CupomDesconto> CupomDesconto { get; set; }
+        public DbSet<Devolucao> Devolucao { get; set; }
+        public DbSet<EnderecoEntrega> EnderecoEntrega { get; set; }
+        public DbSet<Pagamento> Pagamento { get; set; }
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
-        public DbSet<YourNamespace.Models.AvaliacaoProduto> AvaliacaoProduto { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Carrinho> Carrinho { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Categoria> Categoria { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Cliente> Cliente { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Compra> Compra { get; set; } = default!;
-        public DbSet<YourNamespace.Models.CupomDesconto> CupomDesconto { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Devolucao> Devolucao { get; set; } = default!;
-        public DbSet<YourNamespace.Models.EnderecoEntrega> EnderecoEntrega { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Pagamento> Pagamento { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Produto> Produto { get; set; } = default!;
-        public DbSet<YourNamespace.Models.Usuario> Usuario { get; set; } = default!;
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AvaliacaoProduto>().ToTable("AvaliacaoProdutos");
+            modelBuilder.Entity<Carrinho>().ToTable("Carrinhos");
+            modelBuilder.Entity<Categoria>().ToTable("Categorias");
+            modelBuilder.Entity<Cliente>().ToTable("Clientes");
+            modelBuilder.Entity<Compra>().ToTable("Compras");
+            modelBuilder.Entity<CupomDesconto>().ToTable("CupomDescontos");
+            modelBuilder.Entity<Devolucao>().ToTable("Devolucaos");
+            modelBuilder.Entity<EnderecoEntrega>().ToTable("EnderecoEntregas");
+            modelBuilder.Entity<Pagamento>().ToTable("Pagamentos");
+            modelBuilder.Entity<Produto>().ToTable("Produtos");
+            modelBuilder.Entity<Usuario>().ToTable("Usuarios");
+
+        }
     }
 }

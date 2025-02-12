@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Devolucao
     {
         [Key]
-        public long Id { get; set; }
+        public Guid DevolucaoId { get; set; }
 
         [Required]
         [ForeignKey("Compra")]
@@ -28,7 +28,7 @@ namespace YourNamespace.Models
         public string Status { get; set; }
 
         // Navigation properties
-        public virtual Compra Compra { get; set; }
+        public virtual Compra? Compra { get; set; }
         public virtual Produto Produto { get; set; }
     }
 }

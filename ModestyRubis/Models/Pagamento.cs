@@ -2,16 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Pagamento
     {
         [Key]
-        public long Id { get; set; }
+        public Guid PagamentoId { get; set; }
 
         [Required]
         [ForeignKey("Compra")]
-        public long CompraId { get; set; }
+        public Guid CompraId { get; set; }
 
         [Required]
         public string MetodoPagamento { get; set; }

@@ -2,8 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using ModestyRubis.Data;
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<ModestyRubisContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ModestyRubisContext") ?? throw new InvalidOperationException("Connection string 'ModestyRubisContext' not found.")));
+ {
+     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+ });
 
 // Add services to the container.
 

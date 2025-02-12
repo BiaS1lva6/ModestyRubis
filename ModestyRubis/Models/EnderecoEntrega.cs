@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class EnderecoEntrega
     {
         [Key]
-        public long Id { get; set; }
+        public Guid EnderecoEntregaId { get; set; }
 
         [Required]
         [ForeignKey("Cliente")]
-        public long ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
 
         [Required]
         public string Endereco { get; set; }

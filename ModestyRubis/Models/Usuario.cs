@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace YourNamespace.Models
+namespace ModeltyRubis.Models
 {
     public class Usuario
     {
         [Key]
-        public long Id { get; set; }
+        public Guid UsuarioId { get; set; }
 
         [Required]
         [StringLength(100)]
