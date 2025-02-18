@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -98,6 +99,72 @@ namespace ModestyRubis.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        // Novo endpoint para adicionar produto ao carrinho
+        [HttpPost("add-produto")]
+        public async Task<IActionResult> AddProductToCarrinho([FromBody] Carrinho carrinho)
+        {
+            var existingCarrinho = await _context.Carrinho
+                .FirstOrDefaultAsync(c => c.ClienteId == carrinho.ClienteId && c.ProdutoId == carrinho.ProdutoId);
+
+            if (existingCarrinho != null)
+            {
+                existingCarrinho.Quantidade += carrinho.Quantidade;
+                _context.Entry(existingCarrinho).State = EntityState.Modified;
+            }
+            else
+            {
+                _context.Carrinho.Add(carrinho);
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // Novo endpoint para remover produto do carrinho
+        [HttpPost("remove-produto")]
+        public async Task<IActionResult> RemoveProductFromCarrinho([FromBody] Carrinho carrinho)
+        {
+            var existingCarrinho = await _context.Carrinho
+                .FirstOrDefaultAsync(c => c.ClienteId == carrinho.ClienteId && c.ProdutoId == carrinho.ProdutoId);
+
+            if (existingCarrinho == null)
+            {
+                return NotFound("Produto não encontrado no carrinho.");
+            }
+
+            if (existingCarrinho.Quantidade > carrinho.Quantidade)
+            {
+                existingCarrinho.Quantidade -= carrinho.Quantidade;
+                _context.Entry(existingCarrinho).State = EntityState.Modified;
+            }
+            else
+            {
+                _context.Carrinho.Remove(existingCarrinho);
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // Novo endpoint para calcular o valor total do carrinho
+        [HttpGet("valor-total/{clienteId}")]
+        public async Task<ActionResult<decimal>> GetValorTotalCarrinho(Guid clienteId)
+        {
+            var carrinhos = await _context.Carrinho
+                .Include(c => c.Produto)
+                .Where(c => c.ClienteId == clienteId)
+                .ToListAsync();
+
+            if (carrinhos == null || !carrinhos.Any())
+            {
+                return NotFound("Carrinho vazio ou não encontrado.");
+            }
+
+            var valorTotal = carrinhos.Sum(c => c.Produto.Preco * c.Quantidade);
+
+            return Ok(valorTotal);
         }
 
         private bool CarrinhoExists(Guid id)

@@ -100,6 +100,35 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
+        // Novo endpoint para buscar produtos por nome, categoria ou faixa de preço
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Produto>>> SearchProdutos(string nome, Guid? categoriaId, decimal? precoMin, decimal? precoMax)
+        {
+            var query = _context.Produto.AsQueryable();
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                query = query.Where(p => p.Nome.Contains(nome));
+            }
+
+            if (categoriaId.HasValue)
+            {
+                query = query.Where(p => p.CategoriaId == categoriaId.Value);
+            }
+
+            if (precoMin.HasValue)
+            {
+                query = query.Where(p => p.Preco >= precoMin.Value);
+            }
+
+            if (precoMax.HasValue)
+            {
+                query = query.Where(p => p.Preco <= precoMax.Value);
+            }
+
+            return await query.ToListAsync();
+        }
+
         private bool ProdutoExists(Guid id)
         {
             return _context.Produto.Any(e => e.ProdutoId == id);

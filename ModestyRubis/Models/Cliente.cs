@@ -22,5 +22,7 @@ namespace ModestyRubis.Models
         public DateTime? DataNascimento { get; set; }
 
         public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
+
+
     }
 }

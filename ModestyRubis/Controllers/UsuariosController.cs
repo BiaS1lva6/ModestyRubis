@@ -100,6 +100,41 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
+        // Novo endpoint para login
+        [HttpPost("login")]
+        public async Task<ActionResult<Usuario>> Login([FromBody] Usuario loginUsuario)
+        {
+            var usuario = await _context.Usuario
+                .FirstOrDefaultAsync(u => u.NomeUsuario == loginUsuario.NomeUsuario && u.Senha == loginUsuario.Senha);
+
+            if (usuario == null)
+            {
+                return Unauthorized("Nome de usuário ou senha incorretos.");
+            }
+
+            usuario.UltimoLogin = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            return Ok(usuario);
+        }
+
+        // Novo endpoint para registrar novo usuário
+        [HttpPost("registrar")]
+        public async Task<ActionResult<Usuario>> Registrar([FromBody] Usuario novoUsuario)
+        {
+            if (_context.Usuario.Any(u => u.NomeUsuario == novoUsuario.NomeUsuario))
+            {
+                return BadRequest("Nome de usuário já está em uso.");
+            }
+
+            novoUsuario.UsuarioId = Guid.NewGuid();
+            novoUsuario.DataCriacao = DateTime.UtcNow;
+            _context.Usuario.Add(novoUsuario);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUsuario", new { id = novoUsuario.UsuarioId }, novoUsuario);
+        }
+
         private bool UsuarioExists(Guid id)
         {
             return _context.Usuario.Any(e => e.UsuarioId == id);
