@@ -1,13 +1,13 @@
-﻿
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class Produto
     {
         [Key]
-        public Guid ProdutoId { get; set; }
+        public Guid ProdutoId { get; set; } = Guid.NewGuid();
 
         [Required]
         public string Nome { get; set; }
@@ -17,6 +17,7 @@ namespace ModeltyRubis.Models
         public Guid CategoriaId { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal Preco { get; set; }
 
         [Required]

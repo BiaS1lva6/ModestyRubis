@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class Carrinho
     {
         [Key]
-        public Guid CarrinhoId { get; set; }
+        public Guid CarrinhoId { get; set; } = Guid.NewGuid();
 
         [Required]
         [ForeignKey("Cliente")]
@@ -23,7 +23,7 @@ namespace ModeltyRubis.Models
         public DateTime DataAdicionado { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
-        public virtual Cliente? Cliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public virtual Produto Produto { get; set; }
     }
 }

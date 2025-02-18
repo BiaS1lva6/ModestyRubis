@@ -2,16 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class AvaliacaoProduto
     {
         [Key]
-        public Guid AvaliacaoProdutoId { get; set; }
+        public Guid AvaliacaoProdutoId { get; set; } = Guid.NewGuid();
 
         [Required]
         [ForeignKey("Produto")]
-        public long ProdutoId { get; set; }
+        public Guid ProdutoId { get; set; }
 
         [Required]
         [ForeignKey("Cliente")]

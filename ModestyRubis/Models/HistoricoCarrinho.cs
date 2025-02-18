@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModestyRubis.Models
 {
-    public class Devolucao
+    public class HistoricoCarrinho
     {
         [Key]
-        public Guid DevolucaoId { get; set; } = Guid.NewGuid();
+        public Guid HistoricoCarrinhoId { get; set; } = Guid.NewGuid();
 
         [Required]
-        [ForeignKey("Compra")]
-        public Guid CompraId { get; set; }
+        [ForeignKey("Cliente")]
+        public Guid ClienteId { get; set; }
 
         [Required]
         [ForeignKey("Produto")]
@@ -20,15 +20,13 @@ namespace ModestyRubis.Models
         [Required]
         public int Quantidade { get; set; }
 
-        public string Motivo { get; set; }
-
-        public DateTime DataDevolucao { get; set; } = DateTime.UtcNow;
+        public DateTime DataAdicionado { get; set; } = DateTime.UtcNow;
 
         [Required]
         public string Status { get; set; }
 
         // Navigation properties
-        public virtual Compra Compra { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public virtual Produto Produto { get; set; }
     }
 }

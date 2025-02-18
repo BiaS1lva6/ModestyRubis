@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class Categoria
     {
         [Key]
-        public long CategoriaId { get; set; }
+        public Guid CategoriaId { get; set; } = Guid.NewGuid();
 
         [Required]
         [StringLength(100)]

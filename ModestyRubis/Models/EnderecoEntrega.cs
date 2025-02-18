@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class EnderecoEntrega
     {
         [Key]
-        public Guid EnderecoEntregaId { get; set; }
+        public Guid EnderecoEntregaId { get; set; } = Guid.NewGuid();
 
         [Required]
         [ForeignKey("Cliente")]

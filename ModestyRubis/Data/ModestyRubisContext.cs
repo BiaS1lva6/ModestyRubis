@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ModeltyRubis.Models;
+using ModestyRubis.Models;
 
 namespace ModestyRubis.Data
 {
@@ -21,6 +21,7 @@ namespace ModestyRubis.Data
         public DbSet<CupomDesconto> CupomDesconto { get; set; }
         public DbSet<Devolucao> Devolucao { get; set; }
         public DbSet<EnderecoEntrega> EnderecoEntrega { get; set; }
+        public DbSet<HistoricoCarrinho> HistoricoCarrinho { get; set; }
         public DbSet<Pagamento> Pagamento { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
@@ -37,6 +38,7 @@ namespace ModestyRubis.Data
             modelBuilder.Entity<CupomDesconto>().ToTable("CupomDescontos");
             modelBuilder.Entity<Devolucao>().ToTable("Devolucaos");
             modelBuilder.Entity<EnderecoEntrega>().ToTable("EnderecoEntregas");
+            modelBuilder.Entity<HistoricoCarrinho>().ToTable("HistoricoCarrinhos");
             modelBuilder.Entity<Pagamento>().ToTable("Pagamentos");
             modelBuilder.Entity<Produto>().ToTable("Produtos");
             modelBuilder.Entity<Usuario>().ToTable("Usuarios");

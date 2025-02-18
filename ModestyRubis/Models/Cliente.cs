@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class Cliente
     {
         [Key]
-        public Guid ClienteIdId { get; set; }
+        public Guid ClienteId { get; set; } = Guid.NewGuid();
 
         [Required]
         public string Nome { get; set; }

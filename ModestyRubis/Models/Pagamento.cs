@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModeltyRubis.Models
+namespace ModestyRubis.Models
 {
     public class Pagamento
     {
         [Key]
-        public Guid PagamentoId { get; set; }
+        public Guid PagamentoId { get; set; } = Guid.NewGuid();
 
         [Required]
         [ForeignKey("Compra")]
