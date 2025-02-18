@@ -22,19 +22,17 @@ namespace ModestyRubis.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ModeltyRubis.Models.AvaliacaoProduto", b =>
+            modelBuilder.Entity("ModestyRubis.Models.AvaliacaoProduto", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("AvaliacaoProdutoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Avaliacao")
                         .HasColumnType("int");
 
-                    b.Property<long>("ClienteId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comentario")
                         .IsRequired()
@@ -43,10 +41,10 @@ namespace ModestyRubis.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("ProdutoId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("AvaliacaoProdutoId");
 
                     b.HasIndex("ClienteId");
 
@@ -55,27 +53,25 @@ namespace ModestyRubis.Migrations
                     b.ToTable("AvaliacaoProdutos", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Carrinho", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Carrinho", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("CarrinhoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("ClienteId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataAdicionado")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("ProdutoId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CarrinhoId");
 
                     b.HasIndex("ClienteId");
 
@@ -84,31 +80,27 @@ namespace ModestyRubis.Migrations
                     b.ToTable("Carrinhos", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Categoria", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Categoria", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("CategoriaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoriaId");
 
                     b.ToTable("Categorias", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Cliente", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Cliente", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("ClienteId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
@@ -132,45 +124,42 @@ namespace ModestyRubis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ClienteId");
 
                     b.ToTable("Clientes", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Compra", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Compra", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("CompraId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("ClienteId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCompra")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10, 2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CompraId");
+
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Compras", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.CupomDesconto", b =>
+            modelBuilder.Entity("ModestyRubis.Models.CupomDesconto", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("CupomDescontoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Codigo")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DataFim")
                         .HasColumnType("datetime2");
@@ -178,7 +167,7 @@ namespace ModestyRubis.Migrations
                     b.Property<DateTime?>("DataInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("DescontoPercentual")
+                    b.Property<decimal?>("DescontoPercentual")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Descricao")
@@ -188,21 +177,19 @@ namespace ModestyRubis.Migrations
                     b.Property<int?>("UsoMaximo")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CupomDescontoId");
 
                     b.ToTable("CupomDescontos", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Devolucao", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Devolucao", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("DevolucaoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("CompraId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("CompraId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataDevolucao")
                         .HasColumnType("datetime2");
@@ -211,8 +198,8 @@ namespace ModestyRubis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ProdutoId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
@@ -221,7 +208,7 @@ namespace ModestyRubis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DevolucaoId");
 
                     b.HasIndex("CompraId");
 
@@ -230,13 +217,11 @@ namespace ModestyRubis.Migrations
                     b.ToTable("Devolucaos", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.EnderecoEntrega", b =>
+            modelBuilder.Entity("ModestyRubis.Models.EnderecoEntrega", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("EnderecoEntregaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cep")
                         .IsRequired()
@@ -246,8 +231,8 @@ namespace ModestyRubis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ClienteId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -261,23 +246,52 @@ namespace ModestyRubis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("EnderecoEntregaId");
 
                     b.HasIndex("ClienteId");
 
                     b.ToTable("EnderecoEntregas", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Pagamento", b =>
+            modelBuilder.Entity("ModestyRubis.Models.HistoricoCarrinho", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("HistoricoCarrinhoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("CompraId")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime>("DataAdicionado")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("HistoricoCarrinhoId");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("HistoricoCarrinhos", (string)null);
+                });
+
+            modelBuilder.Entity("ModestyRubis.Models.Pagamento", b =>
+                {
+                    b.Property<Guid>("PagamentoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CompraId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataPagamento")
                         .HasColumnType("datetime2");
@@ -293,23 +307,21 @@ namespace ModestyRubis.Migrations
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PagamentoId");
 
                     b.HasIndex("CompraId");
 
                     b.ToTable("Pagamentos", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Produto", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Produto", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("ProdutoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("CategoriaId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -323,22 +335,20 @@ namespace ModestyRubis.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Preco")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10, 2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProdutoId");
 
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Produtos", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Usuario", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Usuario", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("UsuarioId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
@@ -349,8 +359,7 @@ namespace ModestyRubis.Migrations
 
                     b.Property<string>("NomeUsuario")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -359,20 +368,20 @@ namespace ModestyRubis.Migrations
                     b.Property<DateTime?>("UltimoLogin")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios", (string)null);
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.AvaliacaoProduto", b =>
+            modelBuilder.Entity("ModestyRubis.Models.AvaliacaoProduto", b =>
                 {
-                    b.HasOne("ModeltyRubis.Models.Cliente", "Cliente")
+                    b.HasOne("ModestyRubis.Models.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ModeltyRubis.Models.Produto", "Produto")
+                    b.HasOne("ModestyRubis.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,15 +392,15 @@ namespace ModestyRubis.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Carrinho", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Carrinho", b =>
                 {
-                    b.HasOne("ModeltyRubis.Models.Cliente", "Cliente")
+                    b.HasOne("ModestyRubis.Models.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ModeltyRubis.Models.Produto", "Produto")
+                    b.HasOne("ModestyRubis.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -402,15 +411,26 @@ namespace ModestyRubis.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Devolucao", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Compra", b =>
                 {
-                    b.HasOne("ModeltyRubis.Models.Compra", "Compra")
+                    b.HasOne("ModestyRubis.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("ModestyRubis.Models.Devolucao", b =>
+                {
+                    b.HasOne("ModestyRubis.Models.Compra", "Compra")
                         .WithMany()
                         .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ModeltyRubis.Models.Produto", "Produto")
+                    b.HasOne("ModestyRubis.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,9 +441,9 @@ namespace ModestyRubis.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.EnderecoEntrega", b =>
+            modelBuilder.Entity("ModestyRubis.Models.EnderecoEntrega", b =>
                 {
-                    b.HasOne("ModeltyRubis.Models.Cliente", "Cliente")
+                    b.HasOne("ModestyRubis.Models.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -432,9 +452,28 @@ namespace ModestyRubis.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Pagamento", b =>
+            modelBuilder.Entity("ModestyRubis.Models.HistoricoCarrinho", b =>
                 {
-                    b.HasOne("ModeltyRubis.Models.Compra", "Compra")
+                    b.HasOne("ModestyRubis.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModestyRubis.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("ModestyRubis.Models.Pagamento", b =>
+                {
+                    b.HasOne("ModestyRubis.Models.Compra", "Compra")
                         .WithMany()
                         .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -443,9 +482,9 @@ namespace ModestyRubis.Migrations
                     b.Navigation("Compra");
                 });
 
-            modelBuilder.Entity("ModeltyRubis.Models.Produto", b =>
+            modelBuilder.Entity("ModestyRubis.Models.Produto", b =>
                 {
-                    b.HasOne("ModeltyRubis.Models.Categoria", "Categoria")
+                    b.HasOne("ModestyRubis.Models.Categoria", "Categoria")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
