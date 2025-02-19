@@ -20,7 +20,7 @@ namespace ModestyRubis.Models
         public decimal ValorTotal { get; set; }
 
         // Navigation property
-        public virtual Cliente Cliente { get; set; }
-        public string Status { get; internal set; }
+        public Cliente? Cliente { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -26,6 +26,6 @@ namespace ModestyRubis.Models
         public string Descricao { get; set; }
 
         // Navigation property
-        public virtual Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModestyRubis.Data;
 
@@ -11,9 +12,11 @@ using ModestyRubis.Data;
 namespace ModestyRubis.Migrations
 {
     [DbContext(typeof(ModestyRubisContext))]
-    partial class ModestyRubisContextModelSnapshot : ModelSnapshot
+    [Migration("20250219111445_Inicio")]
+    partial class Inicio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,7 +312,7 @@ namespace ModestyRubis.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10, 2)");
 
                     b.HasKey("PagamentoId");
 

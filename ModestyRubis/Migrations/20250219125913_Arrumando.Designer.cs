@@ -12,8 +12,8 @@ using ModestyRubis.Data;
 namespace ModestyRubis.Migrations
 {
     [DbContext(typeof(ModestyRubisContext))]
-    [Migration("20250218122412_Initial")]
-    partial class Initial
+    [Migration("20250219125913_Arrumando")]
+    partial class Arrumando
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,6 +143,10 @@ namespace ModestyRubis.Migrations
 
                     b.Property<DateTime>("DataCompra")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("decimal(10, 2)");
@@ -308,7 +312,7 @@ namespace ModestyRubis.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(10, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("PagamentoId");
 

@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ModestyRubisContext>(options =>
  {
-     options.UseSqlServer(builder.Configuration.GetConnectionString("SQLSenai"));
+     options.UseSqlServer(builder.Configuration.GetConnectionString("Somee"));
  });
 
 // Add services to the container.
@@ -18,11 +18,10 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 

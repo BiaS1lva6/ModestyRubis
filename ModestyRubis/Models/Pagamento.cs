@@ -17,7 +17,7 @@ namespace ModestyRubis.Models
         public string MetodoPagamento { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(10, 2)")]
+        //[Column(TypeName = "decimal(10, 2)")]
         public decimal Valor { get; set; }
 
         public DateTime DataPagamento { get; set; } = DateTime.UtcNow;
@@ -26,6 +26,6 @@ namespace ModestyRubis.Models
         public string Status { get; set; }
 
         // Navigation property
-        public virtual Compra Compra { get; set; }
+        public Compra? Compra { get; set; }
     }
 }

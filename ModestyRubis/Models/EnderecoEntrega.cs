@@ -29,6 +29,6 @@ namespace ModestyRubis.Models
         public string Pais { get; set; }
 
         // Navigation property
-        public virtual Cliente Cliente { get; set; }
+        public Cliente? Cliente { get; set; }
     }
 }

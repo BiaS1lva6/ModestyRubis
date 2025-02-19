@@ -23,7 +23,7 @@ namespace ModestyRubis.Models
         public DateTime DataAdicionado { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
-        public virtual Cliente Cliente { get; set; }
-        public virtual Produto Produto { get; set; }
+        public Cliente? Cliente { get; set; }
+        public Produto? Produto { get; set; }
     }
 }
