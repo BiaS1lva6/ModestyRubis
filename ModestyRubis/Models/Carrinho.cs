@@ -25,5 +25,7 @@ namespace ModestyRubis.Models
         // Navigation properties
         public Cliente? Cliente { get; set; }
         public Produto? Produto { get; set; }
+
+        public bool Finalizado { get; set; }
     }
 }

@@ -7,25 +7,28 @@ namespace ModestyRubis.Models
     public class Pagamento
     {
         [Key]
-        public Guid PagamentoId { get; set; } = Guid.NewGuid();
+        public int PagamentoId { get; set; }
+
+        [ForeignKey("Pedido")]
+        public int PedidoId { get; set; }
+
+        [Required, StringLength(50)]
+        public string FormaPagamento { get; set; }
+
+        [Required, StringLength(50)]
+        public string StatusPagamento { get; set; }
 
         [Required]
-        [ForeignKey("Compra")]
-        public Guid CompraId { get; set; }
-
-        [Required]
-        public string MetodoPagamento { get; set; }
-
-        [Required]
-        //[Column(TypeName = "decimal(10, 2)")]
         public decimal Valor { get; set; }
 
-        public DateTime DataPagamento { get; set; } = DateTime.UtcNow;
-
+        public string? TransactionId { get; set; }
         [Required]
-        public string Status { get; set; }
+        public DateTime DataPagamento { get; set; }
 
-        // Navigation property
-        public Compra? Compra { get; set; }
+        public string? DadosCartao { get; set; }
+        public int? Parcelas { get; set; }
+
+        public Pedido Pedido { get; set; }
     }
+
 }

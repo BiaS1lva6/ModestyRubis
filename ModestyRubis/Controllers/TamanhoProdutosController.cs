@@ -12,47 +12,47 @@ namespace ModestyRubis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PagamentosController : ControllerBase
+    public class TamanhoProdutosController : ControllerBase
     {
         private readonly ModestyRubisContext _context;
 
-        public PagamentosController(ModestyRubisContext context)
+        public TamanhoProdutosController(ModestyRubisContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pagamentos
+        // GET: api/TamanhoProdutos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pagamento>>> GetPagamento()
+        public async Task<ActionResult<IEnumerable<TamanhoProduto>>> GetTamanhoProduto()
         {
-            return await _context.Pagamento.ToListAsync();
+            return await _context.TamanhoProduto.ToListAsync();
         }
 
-        // GET: api/Pagamentos/5
+        // GET: api/TamanhoProdutos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pagamento>> GetPagamento(int id)
+        public async Task<ActionResult<TamanhoProduto>> GetTamanhoProduto(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
+            var tamanhoProduto = await _context.TamanhoProduto.FindAsync(id);
 
-            if (pagamento == null)
+            if (tamanhoProduto == null)
             {
                 return NotFound();
             }
 
-            return pagamento;
+            return tamanhoProduto;
         }
 
-        // PUT: api/Pagamentos/5
+        // PUT: api/TamanhoProdutos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPagamento(int id, Pagamento pagamento)
+        public async Task<IActionResult> PutTamanhoProduto(int id, TamanhoProduto tamanhoProduto)
         {
-            if (id != pagamento.PagamentoId)
+            if (id != tamanhoProduto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pagamento).State = EntityState.Modified;
+            _context.Entry(tamanhoProduto).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ModestyRubis.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PagamentoExists(id))
+                if (!TamanhoProdutoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
-        // POST: api/Pagamentos
+        // POST: api/TamanhoProdutos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pagamento>> PostPagamento(Pagamento pagamento)
+        public async Task<ActionResult<TamanhoProduto>> PostTamanhoProduto(TamanhoProduto tamanhoProduto)
         {
-            _context.Pagamento.Add(pagamento);
+            _context.TamanhoProduto.Add(tamanhoProduto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPagamento", new { id = pagamento.PagamentoId }, pagamento);
+            return CreatedAtAction("GetTamanhoProduto", new { id = tamanhoProduto.Id }, tamanhoProduto);
         }
 
-        // DELETE: api/Pagamentos/5
+        // DELETE: api/TamanhoProdutos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePagamento(int id)
+        public async Task<IActionResult> DeleteTamanhoProduto(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
-            if (pagamento == null)
+            var tamanhoProduto = await _context.TamanhoProduto.FindAsync(id);
+            if (tamanhoProduto == null)
             {
                 return NotFound();
             }
 
-            _context.Pagamento.Remove(pagamento);
+            _context.TamanhoProduto.Remove(tamanhoProduto);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PagamentoExists(int id)
+        private bool TamanhoProdutoExists(int id)
         {
-            return _context.Pagamento.Any(e => e.PagamentoId == id);
+            return _context.TamanhoProduto.Any(e => e.Id == id);
         }
     }
 }

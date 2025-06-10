@@ -21,5 +21,7 @@ namespace ModestyRubis.Models
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 
         public DateTime? UltimoLogin { get; set; }
+        public bool Ativo { get; set; } = true;
+        public string TipoUsuario { get; set; } // "Cliente" ou "Admin"
     }
 }

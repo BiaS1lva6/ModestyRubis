@@ -25,6 +25,9 @@ namespace ModestyRubis.Models
 
         public string Descricao { get; set; }
 
+        public bool Destaque { get; set; } = false;
+        public int OrdemExibicao { get; set; } = 0;
+
         // Navigation property
         public Categoria? Categoria { get; set; }
     }

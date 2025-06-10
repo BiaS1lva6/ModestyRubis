@@ -12,47 +12,47 @@ namespace ModestyRubis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PagamentosController : ControllerBase
+    public class EnderecosController : ControllerBase
     {
         private readonly ModestyRubisContext _context;
 
-        public PagamentosController(ModestyRubisContext context)
+        public EnderecosController(ModestyRubisContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pagamentos
+        // GET: api/Enderecos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pagamento>>> GetPagamento()
+        public async Task<ActionResult<IEnumerable<Endereco>>> GetEndereco()
         {
-            return await _context.Pagamento.ToListAsync();
+            return await _context.Endereco.ToListAsync();
         }
 
-        // GET: api/Pagamentos/5
+        // GET: api/Enderecos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pagamento>> GetPagamento(int id)
+        public async Task<ActionResult<Endereco>> GetEndereco(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
+            var endereco = await _context.Endereco.FindAsync(id);
 
-            if (pagamento == null)
+            if (endereco == null)
             {
                 return NotFound();
             }
 
-            return pagamento;
+            return endereco;
         }
 
-        // PUT: api/Pagamentos/5
+        // PUT: api/Enderecos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPagamento(int id, Pagamento pagamento)
+        public async Task<IActionResult> PutEndereco(int id, Endereco endereco)
         {
-            if (id != pagamento.PagamentoId)
+            if (id != endereco.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pagamento).State = EntityState.Modified;
+            _context.Entry(endereco).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ModestyRubis.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PagamentoExists(id))
+                if (!EnderecoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
-        // POST: api/Pagamentos
+        // POST: api/Enderecos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pagamento>> PostPagamento(Pagamento pagamento)
+        public async Task<ActionResult<Endereco>> PostEndereco(Endereco endereco)
         {
-            _context.Pagamento.Add(pagamento);
+            _context.Endereco.Add(endereco);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPagamento", new { id = pagamento.PagamentoId }, pagamento);
+            return CreatedAtAction("GetEndereco", new { id = endereco.Id }, endereco);
         }
 
-        // DELETE: api/Pagamentos/5
+        // DELETE: api/Enderecos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePagamento(int id)
+        public async Task<IActionResult> DeleteEndereco(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
-            if (pagamento == null)
+            var endereco = await _context.Endereco.FindAsync(id);
+            if (endereco == null)
             {
                 return NotFound();
             }
 
-            _context.Pagamento.Remove(pagamento);
+            _context.Endereco.Remove(endereco);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PagamentoExists(int id)
+        private bool EnderecoExists(int id)
         {
-            return _context.Pagamento.Any(e => e.PagamentoId == id);
+            return _context.Endereco.Any(e => e.Id == id);
         }
     }
 }

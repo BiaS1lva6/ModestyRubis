@@ -4,12 +4,22 @@ using ModestyRubis.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ModestyRubisContext>(options =>
- {
-     options.UseSqlServer(builder.Configuration.GetConnectionString("Somee"));
- });
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLSenai"));
+});
+
+// Adicionando CORS para aceitar requisições de qualquer origem
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTodos", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -22,8 +32,10 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-
 app.UseHttpsRedirection();
+
+// Ativando o CORS antes do mapeamento dos controllers
+app.UseCors("PermitirTodos");
 
 app.UseAuthorization();
 

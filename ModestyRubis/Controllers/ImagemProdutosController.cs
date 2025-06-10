@@ -12,47 +12,47 @@ namespace ModestyRubis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DevolucaosController : ControllerBase
+    public class ImagemProdutosController : ControllerBase
     {
         private readonly ModestyRubisContext _context;
 
-        public DevolucaosController(ModestyRubisContext context)
+        public ImagemProdutosController(ModestyRubisContext context)
         {
             _context = context;
         }
 
-        // GET: api/Devolucaos
+        // GET: api/ImagemProdutos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Devolucao>>> GetDevolucao()
+        public async Task<ActionResult<IEnumerable<ImagemProduto>>> GetImagemProduto()
         {
-            return await _context.Devolucao.ToListAsync();
+            return await _context.ImagemProduto.ToListAsync();
         }
 
-        // GET: api/Devolucaos/5
+        // GET: api/ImagemProdutos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Devolucao>> GetDevolucao(Guid id)
+        public async Task<ActionResult<ImagemProduto>> GetImagemProduto(int id)
         {
-            var devolucao = await _context.Devolucao.FindAsync(id);
+            var imagemProduto = await _context.ImagemProduto.FindAsync(id);
 
-            if (devolucao == null)
+            if (imagemProduto == null)
             {
                 return NotFound();
             }
 
-            return devolucao;
+            return imagemProduto;
         }
 
-        // PUT: api/Devolucaos/5
+        // PUT: api/ImagemProdutos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDevolucao(Guid id, Devolucao devolucao)
+        public async Task<IActionResult> PutImagemProduto(int id, ImagemProduto imagemProduto)
         {
-            if (id != devolucao.DevolucaoId)
+            if (id != imagemProduto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(devolucao).State = EntityState.Modified;
+            _context.Entry(imagemProduto).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ModestyRubis.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DevolucaoExists(id))
+                if (!ImagemProdutoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
-        // POST: api/Devolucaos
+        // POST: api/ImagemProdutos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Devolucao>> PostDevolucao(Devolucao devolucao)
+        public async Task<ActionResult<ImagemProduto>> PostImagemProduto(ImagemProduto imagemProduto)
         {
-            _context.Devolucao.Add(devolucao);
+            _context.ImagemProduto.Add(imagemProduto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDevolucao", new { id = devolucao.DevolucaoId }, devolucao);
+            return CreatedAtAction("GetImagemProduto", new { id = imagemProduto.Id }, imagemProduto);
         }
 
-        // DELETE: api/Devolucaos/5
+        // DELETE: api/ImagemProdutos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDevolucao(Guid id)
+        public async Task<IActionResult> DeleteImagemProduto(int id)
         {
-            var devolucao = await _context.Devolucao.FindAsync(id);
-            if (devolucao == null)
+            var imagemProduto = await _context.ImagemProduto.FindAsync(id);
+            if (imagemProduto == null)
             {
                 return NotFound();
             }
 
-            _context.Devolucao.Remove(devolucao);
+            _context.ImagemProduto.Remove(imagemProduto);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DevolucaoExists(Guid id)
+        private bool ImagemProdutoExists(int id)
         {
-            return _context.Devolucao.Any(e => e.DevolucaoId == id);
+            return _context.ImagemProduto.Any(e => e.Id == id);
         }
     }
 }

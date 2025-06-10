@@ -12,47 +12,47 @@ namespace ModestyRubis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PagamentosController : ControllerBase
+    public class LogAtividadesController : ControllerBase
     {
         private readonly ModestyRubisContext _context;
 
-        public PagamentosController(ModestyRubisContext context)
+        public LogAtividadesController(ModestyRubisContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pagamentos
+        // GET: api/LogAtividades
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pagamento>>> GetPagamento()
+        public async Task<ActionResult<IEnumerable<LogAtividade>>> GetLogAtividades()
         {
-            return await _context.Pagamento.ToListAsync();
+            return await _context.LogAtividades.ToListAsync();
         }
 
-        // GET: api/Pagamentos/5
+        // GET: api/LogAtividades/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pagamento>> GetPagamento(int id)
+        public async Task<ActionResult<LogAtividade>> GetLogAtividade(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
+            var logAtividade = await _context.LogAtividades.FindAsync(id);
 
-            if (pagamento == null)
+            if (logAtividade == null)
             {
                 return NotFound();
             }
 
-            return pagamento;
+            return logAtividade;
         }
 
-        // PUT: api/Pagamentos/5
+        // PUT: api/LogAtividades/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPagamento(int id, Pagamento pagamento)
+        public async Task<IActionResult> PutLogAtividade(int id, LogAtividade logAtividade)
         {
-            if (id != pagamento.PagamentoId)
+            if (id != logAtividade.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pagamento).State = EntityState.Modified;
+            _context.Entry(logAtividade).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ModestyRubis.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PagamentoExists(id))
+                if (!LogAtividadeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
-        // POST: api/Pagamentos
+        // POST: api/LogAtividades
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pagamento>> PostPagamento(Pagamento pagamento)
+        public async Task<ActionResult<LogAtividade>> PostLogAtividade(LogAtividade logAtividade)
         {
-            _context.Pagamento.Add(pagamento);
+            _context.LogAtividades.Add(logAtividade);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPagamento", new { id = pagamento.PagamentoId }, pagamento);
+            return CreatedAtAction("GetLogAtividade", new { id = logAtividade.Id }, logAtividade);
         }
 
-        // DELETE: api/Pagamentos/5
+        // DELETE: api/LogAtividades/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePagamento(int id)
+        public async Task<IActionResult> DeleteLogAtividade(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
-            if (pagamento == null)
+            var logAtividade = await _context.LogAtividades.FindAsync(id);
+            if (logAtividade == null)
             {
                 return NotFound();
             }
 
-            _context.Pagamento.Remove(pagamento);
+            _context.LogAtividades.Remove(logAtividade);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PagamentoExists(int id)
+        private bool LogAtividadeExists(int id)
         {
-            return _context.Pagamento.Any(e => e.PagamentoId == id);
+            return _context.LogAtividades.Any(e => e.Id == id);
         }
     }
 }

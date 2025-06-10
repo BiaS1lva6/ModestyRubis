@@ -6,20 +6,13 @@ namespace ModestyRubis.Models
     public class CupomDesconto
     {
         [Key]
-        public Guid CupomDescontoId { get; set; } = Guid.NewGuid();
+        public Guid CupomId { get; set; }
 
-        [Required]
-        public string Codigo { get; set; }
-
-        public string Descricao { get; set; }
-
-        [Range(0, 100)]
-        public decimal? DescontoPercentual { get; set; }
-
-        public DateTime? DataInicio { get; set; }
-
-        public DateTime? DataFim { get; set; }
-
-        public int? UsoMaximo { get; set; }
+        public string Nome { get; set; }
+        public int Desconto { get; set; }
+        public DateTime? DataValidade { get; set; }
+        public bool? Ativo { get; set; }
+        public DateTime? DataCriacao { get; set; }
+        public int? LimiteUso { get; set; }
     }
 }

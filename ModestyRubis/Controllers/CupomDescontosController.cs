@@ -47,7 +47,7 @@ namespace ModestyRubis.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCupomDesconto(Guid id, CupomDesconto cupomDesconto)
         {
-            if (id != cupomDesconto.CupomDescontoId)
+            if (id != cupomDesconto.CupomId)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace ModestyRubis.Controllers
             _context.CupomDesconto.Add(cupomDesconto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCupomDesconto", new { id = cupomDesconto.CupomDescontoId }, cupomDesconto);
+            return CreatedAtAction("GetCupomDesconto", new { id = cupomDesconto.CupomId }, cupomDesconto);
         }
 
         // DELETE: api/CupomDescontos/5
@@ -102,7 +102,7 @@ namespace ModestyRubis.Controllers
 
         private bool CupomDescontoExists(Guid id)
         {
-            return _context.CupomDesconto.Any(e => e.CupomDescontoId == id);
+            return _context.CupomDesconto.Any(e => e.CupomId == id);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ModestyRubis.Models
         public string Status { get; set; }
 
         // Navigation properties
-        public virtual Cliente Cliente { get; set; }
-        public virtual Produto Produto { get; set; }
+        public Cliente Cliente { get; set; }
+        public Produto Produto { get; set; }
     }
 }

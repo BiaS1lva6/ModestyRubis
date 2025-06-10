@@ -12,47 +12,47 @@ namespace ModestyRubis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PagamentosController : ControllerBase
+    public class StatusPedidosController : ControllerBase
     {
         private readonly ModestyRubisContext _context;
 
-        public PagamentosController(ModestyRubisContext context)
+        public StatusPedidosController(ModestyRubisContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pagamentos
+        // GET: api/StatusPedidos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pagamento>>> GetPagamento()
+        public async Task<ActionResult<IEnumerable<StatusPedido>>> GetStatusPedido()
         {
-            return await _context.Pagamento.ToListAsync();
+            return await _context.StatusPedido.ToListAsync();
         }
 
-        // GET: api/Pagamentos/5
+        // GET: api/StatusPedidos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pagamento>> GetPagamento(int id)
+        public async Task<ActionResult<StatusPedido>> GetStatusPedido(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
+            var statusPedido = await _context.StatusPedido.FindAsync(id);
 
-            if (pagamento == null)
+            if (statusPedido == null)
             {
                 return NotFound();
             }
 
-            return pagamento;
+            return statusPedido;
         }
 
-        // PUT: api/Pagamentos/5
+        // PUT: api/StatusPedidos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPagamento(int id, Pagamento pagamento)
+        public async Task<IActionResult> PutStatusPedido(int id, StatusPedido statusPedido)
         {
-            if (id != pagamento.PagamentoId)
+            if (id != statusPedido.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pagamento).State = EntityState.Modified;
+            _context.Entry(statusPedido).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ModestyRubis.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PagamentoExists(id))
+                if (!StatusPedidoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ModestyRubis.Controllers
             return NoContent();
         }
 
-        // POST: api/Pagamentos
+        // POST: api/StatusPedidos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pagamento>> PostPagamento(Pagamento pagamento)
+        public async Task<ActionResult<StatusPedido>> PostStatusPedido(StatusPedido statusPedido)
         {
-            _context.Pagamento.Add(pagamento);
+            _context.StatusPedido.Add(statusPedido);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPagamento", new { id = pagamento.PagamentoId }, pagamento);
+            return CreatedAtAction("GetStatusPedido", new { id = statusPedido.Id }, statusPedido);
         }
 
-        // DELETE: api/Pagamentos/5
+        // DELETE: api/StatusPedidos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePagamento(int id)
+        public async Task<IActionResult> DeleteStatusPedido(int id)
         {
-            var pagamento = await _context.Pagamento.FindAsync(id);
-            if (pagamento == null)
+            var statusPedido = await _context.StatusPedido.FindAsync(id);
+            if (statusPedido == null)
             {
                 return NotFound();
             }
 
-            _context.Pagamento.Remove(pagamento);
+            _context.StatusPedido.Remove(statusPedido);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PagamentoExists(int id)
+        private bool StatusPedidoExists(int id)
         {
-            return _context.Pagamento.Any(e => e.PagamentoId == id);
+            return _context.StatusPedido.Any(e => e.Id == id);
         }
     }
 }
