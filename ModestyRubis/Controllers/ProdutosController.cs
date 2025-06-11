@@ -25,7 +25,10 @@ namespace ModestyRubis.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProduto()
         {
-            return await _context.Produto.ToListAsync();
+            var produtos = await _context.Produto
+                .Include(p => p.Categoria) // Inclui a categoria do produto
+                .ToListAsync();
+            return produtos;
         }
 
         // GET: api/Produtos/5

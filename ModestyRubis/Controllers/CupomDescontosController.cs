@@ -42,6 +42,19 @@ namespace ModestyRubis.Controllers
             return cupomDesconto;
         }
 
+        // GET : Buscar cupom por Nome
+        [HttpGet("GetByName")]
+        public async Task<ActionResult<CupomDesconto>> GetCupomDescontoByName(string nome)
+        {
+            var cupomDesconto = await _context.CupomDesconto
+                .FirstOrDefaultAsync(c => c.Nome.Contains(nome));
+            if (cupomDesconto == null)
+            {
+                return NotFound();
+            }
+            return cupomDesconto;
+        }
+
         // PUT: api/CupomDescontos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -99,6 +112,9 @@ namespace ModestyRubis.Controllers
 
             return NoContent();
         }
+
+
+
 
         private bool CupomDescontoExists(Guid id)
         {

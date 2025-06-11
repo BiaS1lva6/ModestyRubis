@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ModestyRubis.Data;
 using ModestyRubis.Models;
+using ModestyRubis.Services;
 
 namespace ModestyRubis.Controllers
 {
@@ -78,11 +79,24 @@ namespace ModestyRubis.Controllers
         [HttpPost]
         public async Task<ActionResult<Frete>> PostFrete(Frete frete)
         {
+            var freteService = new CorreiosFreteService();
+            try
+            {
+                var resultado = await freteService.CalcularFreteAsync(frete);
+                frete.Valor = resultado.valor;
+                frete.PrazoEntrega = resultado.prazo;
+            }
+            catch
+            {
+                return StatusCode(500, "Erro ao calcular o frete com os Correios");
+            }
+
             _context.Frete.Add(frete);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFrete", new { id = frete.Id }, frete);
         }
+
 
         // DELETE: api/Fretes/5
         [HttpDelete("{id}")]
@@ -99,6 +113,22 @@ namespace ModestyRubis.Controllers
 
             return NoContent();
         }
+
+        public class CalculoFreteRequest
+        {
+            public decimal ValorTotal { get; set; }
+        }
+
+        [HttpPost("CalcularFrete")]
+        public ActionResult<decimal> CalcularFrete([FromBody] CalculoFreteRequest request)
+        {
+            if (request.ValorTotal < 0)
+                return BadRequest("O valor total deve ser maior ou igual a zero.");
+
+            decimal resultado = request.ValorTotal * 0.20m;
+            return Ok(resultado);
+        }
+
 
         private bool FreteExists(int id)
         {
