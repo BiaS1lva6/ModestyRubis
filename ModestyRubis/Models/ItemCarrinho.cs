@@ -35,10 +35,10 @@ namespace ModestyRubis.Models
 
         // Navigation Properties
         [ForeignKey("CarrinhoId")]
-        public Carrinho Carrinho { get; set; }
+        public Carrinho? Carrinho { get; set; }
 
         [ForeignKey("ProdutoId")]
-        public Produto Produto { get; set; }
+        public Produto? Produto { get; set; }
     }
 
 }

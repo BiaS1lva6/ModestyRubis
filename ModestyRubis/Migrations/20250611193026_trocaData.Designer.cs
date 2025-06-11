@@ -12,8 +12,8 @@ using ModestyRubis.Data;
 namespace ModestyRubis.Migrations
 {
     [DbContext(typeof(ModestyRubisContext))]
-    [Migration("20250610112316_Initial")]
-    partial class Initial
+    [Migration("20250611193026_trocaData")]
+    partial class trocaData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

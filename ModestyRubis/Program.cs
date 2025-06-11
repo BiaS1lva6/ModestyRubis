@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ModestyRubisContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLSenai"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("somee"));
 });
 
 // Adicionando CORS para aceitar requisições de qualquer origem
